@@ -87,9 +87,11 @@ module Jekyll
 
       img_attrs["height"] = attrs["height"] if attrs["height"]
       img_attrs["width"]  = attrs["width"]  if attrs["width"]
-      img_attrs["src"] = site.config['url'] + src.sub(/(\.\w+)$/, "-#{img.columns}x#{img.rows}" + '\1')
 
-      filename = img_attrs["src"].sub(/^\//, '')
+      filename = src.sub(/(\.\w+)$/, "-#{img.columns}x#{img.rows}" + '\1').sub(/^\//, '')
+
+      img_attrs["src"] = site.config['url'] + '/' + filename
+      
       dest = File.join(site.dest, filename)
       FileUtils.mkdir_p(File.dirname(dest))
 
